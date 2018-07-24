@@ -1,19 +1,19 @@
 import React from 'react';
 import {observer, inject} from 'mobx-react'
 
-const HeroesList = (props) => {
+const HeroesList = ({store:{heroes, removeCharacterById}}) => {
     return (
         <div>
             <h4 className="text-uppercase">Heores</h4>
             <ul className="list-group">
                 {
-                    props.store.heroes.map(item => {
+                    heroes.map(item => {
                         return (
                             <li key={item.id} className="list-group-item">
                                 <div className="list-item">{item.id}.-{item.name}</div>
                                 <div
                                     className="list-item right-button"
-                                    onClick={() => props.store.removeCharacterById(item.id)}> - </div>
+                                    onClick={() => removeCharacterById(item.id)}> - </div>
                             </li>
                         );
                     })
@@ -21,7 +21,6 @@ const HeroesList = (props) => {
             </ul>
         </div>
     );
-
 }
 
 export default (inject('store'))(observer(HeroesList))
